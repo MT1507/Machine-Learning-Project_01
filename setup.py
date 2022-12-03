@@ -1,34 +1,39 @@
 from setuptools import setup,find_packages
 from typing import List
 
+#Declaring variables for setup functions
+PROJECT_NAME="housing-predictor"
+VERSION="0.0.3"
+AUTHOR="Avnish Yadav"
+DESRCIPTION="This is a first FSDS Nov batch Machine Learning Project"
 
-# Declaring variables for setup functions
-PROJECT_NAME = "housing-predictor"
-VERSION = "0.0.1"
-AUTHOR = "Mangesh Takras"
-DESCRIPTION = "This is a first machine learning project of a batch"
-PACKAGES = ["housing"]
-REQUIREMENT_FILE_NAME = "requirements.txt"
+REQUIREMENT_FILE_NAME="requirements.txt"
+
+HYPHEN_E_DOT = "-e ."
 
 
-
-def get_requirements_list()->List[str]:
+def get_requirements_list() -> List[str]:
     """
-    Discription : This function is going to return list of requirement which 
-    mentioned in reqirements.txt file
-
-    Return : This function is going to return list which contain name of libraries 
-    mentioned in reqirements.txt file  
+    Description: This function is going to return list of requirement
+    mention in requirements.txt file
+    return This function is going to return a list which contain name
+    of libraries mentioned in requirements.txt file
     """
-    with open (REQUIREMENT_FILE_NAME) as requirement_file:
-        return requirement_file.readlines().remove("-e .")
-       
+    with open(REQUIREMENT_FILE_NAME) as requirement_file:
+        requirement_list = requirement_file.readlines()
+        requirement_list = [requirement_name.replace("\n", "") for requirement_name in requirement_list]
+        if HYPHEN_E_DOT in requirement_list:
+            requirement_list.remove(HYPHEN_E_DOT)
+        return requirement_list
+
+
+
 setup(
-    name=PROJECT_NAME,
-    version= VERSION,
-    author= AUTHOR,
-    description= DESCRIPTION,
-    packages= find_packages(),
-    install_requires=get_requirements_list()
-
+name=PROJECT_NAME,
+version=VERSION,
+author=AUTHOR,
+description=DESRCIPTION,
+packages=find_packages(), 
+install_requires=get_requirements_list()
 )
+
